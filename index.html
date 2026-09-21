@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check-in PEX2</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;font-family:'Sora',sans-serif}
+body{margin:0;min-height:100vh;background:#0a0a0a;display:flex;align-items:center;justify-content:center;padding:20px;color:#fff}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(600px 400px at 15% 10%,#c6ff00 0%,transparent 60%),radial-gradient(500px 300px at 85% 85%,#7c3aed 0%,transparent 60%),#0a0a0a}
+.card{width:100%;max-width:420px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(20px);border-radius:28px;padding:26px;box-shadow:0 20px 80px rgba(0,0,0,.5)}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.dot{width:42px;height:42px;border-radius:12px;background:#c6ff00;color:#000;display:grid;place-items:center;font-weight:800;font-size:18px}
+.top h2{margin:0;font-size:20px;letter-spacing:-.02em}
+.top p{margin:2px 0 0;font-size:12px;opacity:.6}
+label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.5;font-weight:700;margin:14px 0 6px;display:block}
+input,select{width:100%;padding:13px 14px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;outline:none}
+input::placeholder{color:rgba(255,255,255,.4)}
+input:focus,select:focus{border-color:#c6ff00}
+select option{color:#000}
+button{width:100%;margin-top:20px;padding:14px;border:0;border-radius:14px;background:#fff;color:#000;font-weight:700;font-size:15px;cursor:pointer;transition:.15s}
+button:active{transform:scale(.98)}
+#ok{display:none;margin-top:14px;background:rgba(198,255,0,.15);border:1px solid rgba(198,255,0,.3);color:#c6ff00;padding:14px;border-radius:12px;text-align:center;font-weight:600;font-size:14px}
+.pill{display:inline-block;margin-top:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:6px 12px;border-radius:999px;font-size:11px;opacity:.7}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="card">
+<div class="top"><div class="dot">P2</div><div><h2>Check-in PEX2</h2><p>Design estudantil • rápido e direto</p></div></div>
+
+<label>Nome</label>
+<input id="nome" placeholder="Seu nome completo *">
+
+<label>Turma</label>
+<select id="turma"><option value="">Selecione *</option><option>Manhã</option><option>Noite</option><option>EAD</option></select>
+
+<label>Data da aula</label>
+<input type="date" id="data">
+
+<label>Assunto da aula</label>
+<input id="assunto" placeholder="Ex: Metodologia *">
+
+<label>Nota para a aula</label>
+<select id="nota"><option value="">De 1 a 5 *</option><option>1 - fraca</option><option>2 - ok</option><option>3 - boa</option><option>4 - muito boa</option><option>5 - excelente</option></select>
+
+<button onclick="enviar()" id="btn">Enviar check-in →</button>
+<div id="ok"></div>
+<div style="text-align:center"><span class="pill">Chega na hora pra profa</span></div>
+</div>
+
+<script>
+const TOPICO = "pex2-gisely-2026";
+data.valueAsDate = new Date();
+
+async function enviar(){
+ let n=nome.value.trim(), t=turma.value, d=data.value, a=assunto.value.trim(), no=nota.value;
+ if(!n||!t||!d||!a||!no){alert('Preencha tudo: nome, turma, data, assunto e nota');return}
+ let agora=new Date();
+ let hora=agora.toLocaleTimeString('pt-BR');
+ let dataC=agora.toLocaleDateString('pt-BR');
+ let btn=document.getElementById('btn');
+ btn.innerText='Enviando...'; btn.disabled=true;
+
+ // Notificação inédita pra você na hora
+ try{
+  await fetch(`https://ntfy.sh/${TOPICO}`,{
+   method:'POST',
+   body:`Nome: ${n}\nTurma: ${t}\nData: ${d}\nAssunto: ${a}\nNota: ${no}\nHora: ${dataC} ${hora}`,
+   headers:{'Title':`Check-in: ${n}`,'Priority':'high'}
+  });
+ }catch(e){}
+
+ btn.innerText='ENVIAR'; btn.disabled=false;
+ let ok=document.getElementById('ok');
+ ok.style.display='block';
+ ok.innerText=`✔️ Enviado às ${hora} - ${n.split(' ')[0]}, recebido!`;
+ nome.value=''; turma.value=''; assunto.value=''; nota.value='';
+}
+</script>
+</body>
+</html>
