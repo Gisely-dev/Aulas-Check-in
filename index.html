@@ -6,82 +6,59 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;font-family:'Inter',sans-serif}
-:root{--black:#0e0e0e;--white:#ffffff;--blue:#0f2040;--yellow:#ffcc00;--line:#e9e9e9}
-body{margin:0;min-height:100vh;background:var(--white);display:flex;align-items:center;justify-content:center;padding:24px;color:var(--black)}
-.card{width:100%;max-width:380px;background:var(--white);border:2px solid var(--black);border-radius:22px;padding:28px;position:relative;overflow:hidden}
-.card::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--blue) 0 60%,var(--yellow) 60% 100%)}
-.top{display:flex;align-items:center;gap:12px;margin-bottom:26px;margin-top:6px}
-.icon{width:40px;height:40px;background:var(--black);border-radius:11px;display:grid;place-items:center;color:var(--yellow);font-size:18px;border:2px solid var(--black)}
-.top h2{margin:0;font-size:20px;letter-spacing:-.04em;font-weight:800}
-.top h2 span{color:var(--blue)}
-.top p{margin:4px 0 0;font-size:12px;color:#777;font-weight:500}
-label{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--blue);text-transform:uppercase;margin:18px 0 8px;display:block}
-input,select{width:100%;padding:13px 14px;border-radius:12px;border:2px solid var(--black);background:var(--white);color:var(--black);outline:none;font-size:14px;font-weight:500}
-input:focus,select:focus{border-color:var(--blue);box-shadow:4px 4px 0 var(--yellow)}
-input::placeholder{color:#aaa}
-button{width:100%;margin-top:24px;padding:14px;border:2px solid var(--black);border-radius:12px;background:var(--black);color:var(--white);font-weight:800;font-size:14px;letter-spacing:.02em;cursor:pointer;box-shadow:4px 4px 0 var(--blue);transition:.15s}
-button:hover{transform:translate(-1px,-1px);box-shadow:6px 6px 0 var(--blue)}
-button:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--blue)}
-button:disabled{opacity:.6;transform:none;box-shadow:4px 4px 0 var(--blue)}
-#ok{display:none;margin-top:14px;background:var(--yellow);border:2px solid var(--black);padding:12px;border-radius:12px;text-align:center;font-size:13px;font-weight:700;color:var(--black)}
-.dot{position:absolute;bottom:-18px;right:-18px;width:80px;height:80px;background:var(--yellow);border:2px solid var(--black);border-radius:50%;opacity:.9}
-.dot2{position:absolute;top:60px;right:-12px;width:14px;height:14px;background:var(--blue);border-radius:50%}
+body{margin:0;min-height:100vh;background:#050505;display:flex;align-items:center;justify-content:center;padding:20px;color:#fff}
+.card{width:100%;max-width:380px;background:#0f0f0f;border:1px solid #1e1e1e;border-radius:20px;padding:26px}
+.top{margin-bottom:24px}
+.top h2{margin:0;font-size:20px;font-weight:800}
+.top h2 b{color:#ffcc00}
+.top p{margin:6px 0 0;font-size:12px;color:#666}
+label{font-size:10px;font-weight:800;letter-spacing:.12em;color:#888;text-transform:uppercase;margin:18px 0 7px;display:block}
+input,select{width:100%;padding:13px;border-radius:10px;border:1px solid #252525;background:#151515;color:#fff;outline:none;font-size:14px}
+input:focus,select:focus{border-color:#fff}
+select option{background:#151515}
+button{width:100%;margin-top:24px;padding:14px;border-radius:12px;border:1px solid #fff;background:#fff;color:#000;font-weight:800;font-size:14px;cursor:pointer}
+button:hover{background:#ffcc00;border-color:#ffcc00}
+#ok{display:none;margin-top:14px;background:#102040;border:1px solid #1e3a8a;color:#8ab4ff;padding:12px;border-radius:10px;text-align:center;font-size:13px;font-weight:600}
+.bar{height:3px;background:linear-gradient(90deg,#1e3a8a 60%,#ffcc00 40%);border-radius:99px;margin-bottom:20px}
 </style>
 </head>
 <body>
 <div class="card">
-<div class="dot"></div><div class="dot2"></div>
-
+<div class="bar"></div>
 <div class="top">
-<div class="icon">📝</div>
-<div><h2>Check-in <span>PEX2</span></h2><p>Registro oficial de presença</p></div>
+<h2>CHECK-IN <b>PEX2</b></h2>
+<p>preto • branco • azul escuro • amarelo</p>
 </div>
 
 <label>Nome</label>
-<input id="nome" placeholder="Seu nome completo *">
+<input id="nome" placeholder="Seu nome *">
 
 <label>Turma</label>
 <select id="turma"><option value="">Selecione *</option><option>Manhã</option><option>Tarde</option><option>EAD</option></select>
 
-<label>Data da aula</label>
+<label>Data</label>
 <input type="date" id="data">
 
 <label>Assunto</label>
 <input id="assunto" placeholder="Tema da aula *">
 
 <label>Nota</label>
-<select id="nota"><option value="">Nota de 1 a 5</option><option>1 - Não entendi</option><option>2 - Entendi pouco</option><option>3 - Fiquei com dúvidas</option><option>4 - Entendi</option><option>5 - Entendi tudo</option></select>
+<select id="nota"><option value="">1 a 5 *</option><option>1 - Não entendi</option><option>2 - Entendi pouco</option><option>3 - Fiquei com dúvidas</option><option>4 - Entendi</option><option>5 - Entendi tudo</option></select>
 
 <button onclick="enviar()" id="btn">ENVIAR</button>
 <div id="ok"></div>
 </div>
 
 <script>
-const TOPICO = "pex2-gisely-2026";
-data.valueAsDate = new Date();
-
+const TOPICO="pex2-gisely-2026";
+data.valueAsDate=new Date();
 async function enviar(){
- let n=nome.value.trim(), t=turma.value, d=data.value, a=assunto.value.trim(), no=nota.value;
- if(!n||!t||!d||!a||!no){alert('Preencha tudo: nome, turma, data, assunto e nota');return}
- let agora=new Date();
- let hora=agora.toLocaleTimeString('pt-BR');
- let dataC=agora.toLocaleDateString('pt-BR');
- let btn=document.getElementById('btn');
- btn.innerText='Enviando...'; btn.disabled=true;
-
- try{
-  await fetch(`https://ntfy.sh/${TOPICO}`,{
-   method:'POST',
-   body:`Nome: ${n}\nTurma: ${t}\nData: ${d}\nAssunto: ${a}\nNota: ${no}\nHora: ${dataC} ${hora}`,
-   headers:{'Title':`Check-in: ${n}`,'Priority':'high'}
-  });
- }catch(e){}
-
- btn.innerText='ENVIAR CHECK-IN'; btn.disabled=false;
- let ok=document.getElementById('ok');
- ok.style.display='block';
- ok.innerText=`Enviado às ${hora} • Valeu, ${n.split(' ')[0]}!`;
- nome.value=''; turma.value=''; assunto.value=''; nota.value='';
+ let n=nome.value.trim(),t=turma.value,d=data.value,a=assunto.value.trim(),no=nota.value;
+ if(!n||!t||!d||!a||!no){alert('Preencha tudo');return}
+ let h=new Date().toLocaleTimeString('pt-BR'), dt=new Date().toLocaleDateString('pt-BR');
+ btn.innerText='Enviando...';btn.disabled=true;
+ try{await fetch(`https://ntfy.sh/${TOPICO}`,{method:'POST',body:`Nome:${n}\nTurma:${t}\nData:${d}\nAssunto:${a}\nNota:${no}\nHora:${dt} ${h}`,headers:{Title:`Check-in: ${n}`,Priority:'high'}})}catch(e){}
+ btn.innerText='ENVIAR';btn.disabled=false;ok.style.display='block';ok.innerText=`Enviado às ${h}`;nome.value='';turma.value='';assunto.value='';nota.value='';
 }
 </script>
 </body>
