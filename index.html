@@ -6,20 +6,49 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;font-family:'Inter',sans-serif}
-body{margin:0;min-height:100vh;background:#050505;display:flex;align-items:center;justify-content:center;padding:20px;color:#fff}
-.card{width:100%;max-width:380px;background:#0f0f0f;border:1px solid #1e1e1e;border-radius:20px;padding:26px}
+body{
+  margin:0;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;color:#fff;
+  background:#050505;
+}
+.card{
+  width:100%;max-width:380px;
+  background: linear-gradient(180deg, #151515 0%, #0e0e0e 100%);
+  border:1px solid #1e1e1e;
+  border-radius:24px;
+  padding:26px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06);
+}
 .top{margin-bottom:24px}
-.top h2{margin:0;font-size:20px;font-weight:800}
+.top h2{margin:0;font-size:20px;font-weight:800;letter-spacing:-0.02em}
 .top h2 b{color:#ffcc00}
 .top p{margin:6px 0 0;font-size:12px;color:#666}
 label{font-size:10px;font-weight:800;letter-spacing:.12em;color:#888;text-transform:uppercase;margin:18px 0 7px;display:block}
-input,select{width:100%;padding:13px;border-radius:10px;border:1px solid #252525;background:#151515;color:#fff;outline:none;font-size:14px}
+input,select{
+  width:100%;padding:13px 14px;border-radius:12px;
+  border:1px solid #232323;
+  background: linear-gradient(180deg, #1a1a1a 0%, #141414 100%);
+  color:#fff;outline:none;font-size:14px;
+  transition:.2s;
+}
 input:focus,select:focus{border-color:#fff}
 select option{background:#151515}
-button{width:100%;margin-top:24px;padding:14px;border-radius:12px;border:1px solid #fff;background:#fff;color:#000;font-weight:800;font-size:14px;cursor:pointer}
-button:hover{background:#ffcc00;border-color:#ffcc00}
-#ok{display:none;margin-top:14px;background:#102040;border:1px solid #1e3a8a;color:#8ab4ff;padding:12px;border-radius:10px;text-align:center;font-size:13px;font-weight:600}
-.bar{height:3px;background:linear-gradient(90deg,#1e3a8a 60%,#ffcc00 40%);border-radius:99px;margin-bottom:20px}
+button{
+  width:100%;margin-top:24px;padding:14px;border-radius:12px;
+  border:1px solid #fff;
+  background: linear-gradient(180deg, #ffffff 0%, #ededed 100%);
+  color:#000;font-weight:800;font-size:14px;cursor:pointer;
+  transition:.2s;
+}
+button:hover{background: linear-gradient(180deg, #ffdb1a 0%, #ffcc00 100%);border-color:#ffcc00}
+button:disabled{opacity:.6}
+#ok{display:none;margin-top:14px;background: linear-gradient(180deg, #111f3d 0%, #0e1a33 100%);border:1px solid #1e3a8a;color:#8ab4ff;padding:12px;border-radius:12px;text-align:center;font-size:13px;font-weight:600}
+.bar{
+  height:4px;
+  background: linear-gradient(90deg,#1e3a8a 0%, #345ac9 55%, #ffcc00 100%);
+  border-radius:99px;margin-bottom:22px;
+}
 </style>
 </head>
 <body>
@@ -29,26 +58,19 @@ button:hover{background:#ffcc00;border-color:#ffcc00}
 <h2>CHECK-IN <b>PEX2</b></h2>
 <p>preto • branco • azul escuro • amarelo</p>
 </div>
-
 <label>Nome</label>
-<input id="nome" placeholder="Seu nome *">
-
+<input id="nome" placeholder="Seu nome">
 <label>Turma</label>
 <select id="turma"><option value="">Selecione</option><option>Manhã</option><option>Tarde</option><option>EAD</option></select>
-
 <label>Data</label>
 <input type="date" id="data">
-
 <label>Assunto</label>
-<input id="assunto" placeholder="Tema da aula *">
-
+<input id="assunto" placeholder="Tema da aula">
 <label>Nota</label>
 <select id="nota"><option value="">1 a 5</option><option>1 - Não entendi</option><option>2 - Entendi pouco</option><option>3 - Fiquei com dúvidas</option><option>4 - Entendi</option><option>5 - Entendi tudo</option></select>
-
 <button onclick="enviar()" id="btn">ENVIAR</button>
 <div id="ok"></div>
 </div>
-
 <script>
 const TOPICO="pex2-gisely-2026";
 data.valueAsDate=new Date();
