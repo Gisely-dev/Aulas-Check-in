@@ -3,31 +3,33 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Check-in PEX2</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;font-family:'Sora',sans-serif}
-body{margin:0;min-height:100vh;background:#0a0a0a;display:flex;align-items:center;justify-content:center;padding:20px;color:#fff}
-.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(600px 400px at 15% 10%,#c6ff00 0%,transparent 60%),radial-gradient(500px 300px at 85% 85%,#7c3aed 0%,transparent 60%),#0a0a0a}
-.card{width:100%;max-width:420px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(20px);border-radius:28px;padding:26px;box-shadow:0 20px 80px rgba(0,0,0,.5)}
-.top{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.dot{width:42px;height:42px;border-radius:12px;background:#c6ff00;color:#000;display:grid;place-items:center;font-weight:800;font-size:18px}
-.top h2{margin:0;font-size:20px;letter-spacing:-.02em}
-.top p{margin:2px 0 0;font-size:12px;opacity:.6}
-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.5;font-weight:700;margin:14px 0 6px;display:block}
-input,select{width:100%;padding:13px 14px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#fff;outline:none}
-input::placeholder{color:rgba(255,255,255,.4)}
-input:focus,select:focus{border-color:#c6ff00}
-select option{color:#000}
-button{width:100%;margin-top:20px;padding:14px;border:0;border-radius:14px;background:#fff;color:#000;font-weight:700;font-size:15px;cursor:pointer;transition:.15s}
+*{box-sizing:border-box;font-family:'Inter',sans-serif}
+body{margin:0;min-height:100vh;background:#fafafa;display:flex;align-items:center;justify-content:center;padding:24px;color:#111}
+.card{width:100%;max-width:380px;background:#fff;border:1px solid #e5e5e5;border-radius:20px;padding:28px}
+.head{margin-bottom:28px}
+.head .badge{width:32px;height:32px;border-radius:9px;background:#111;color:#fff;display:grid;place-items:center;font-size:14px;margin-bottom:14px}
+.head h2{margin:0;font-size:20px;letter-spacing:-.04em;font-weight:700}
+.head p{margin:6px 0 0;font-size:13px;color:#888}
+label{font-size:11px;font-weight:600;letter-spacing:.06em;color:#999;text-transform:uppercase;margin:18px 0 8px;display:block}
+input,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e5e5e5;background:#fafafa;color:#111;outline:none;font-size:14px;transition:.15s}
+input:focus,select:focus{background:#fff;border-color:#111}
+input::placeholder{color:#bbb}
+button{width:100%;margin-top:24px;padding:13px;border:0;border-radius:12px;background:#111;color:#fff;font-weight:600;font-size:14px;cursor:pointer;transition:.15s}
+button:hover{background:#000}
 button:active{transform:scale(.98)}
-#ok{display:none;margin-top:14px;background:rgba(198,255,0,.15);border:1px solid rgba(198,255,0,.3);color:#c6ff00;padding:14px;border-radius:12px;text-align:center;font-weight:600;font-size:14px}
-.pill{display:inline-block;margin-top:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:6px 12px;border-radius:999px;font-size:11px;opacity:.7}
+button:disabled{opacity:.5}
+#ok{display:none;margin-top:14px;background:#f4f4f5;border:1px solid #e5e5e5;padding:12px;border-radius:12px;text-align:center;font-size:13px;font-weight:500}
 </style>
 </head>
 <body>
-<div class="bg"></div>
 <div class="card">
-<div class="top"><div class="dot">🧑🏽‍💻</div><div><h2>Check-in PEX2</h2><p>Design estudantil • rápido e direto</p></div></div>
+<div class="head">
+<div class="badge">🧑🏽‍💻</div>
+<h2>Check-in PEX2</h2>
+<p>Presença rápida e direta.</p>
+</div>
 
 <label>Nome</label>
 <input id="nome" placeholder="Seu nome completo *">
@@ -38,15 +40,14 @@ button:active{transform:scale(.98)}
 <label>Data da aula</label>
 <input type="date" id="data">
 
-<label>Assunto da aula</label>
-<input id="assunto" placeholder="Ex: Tema *">
+<label>Assunto</label>
+<input id="assunto" placeholder="Tema da aula *">
 
-<label>Nota para a aula</label>
+<label>Nota</label>
 <select id="nota"><option value="">De 1 a 5 *</option><option>1 - Não entendi</option><option>2 - Entendi pouco</option><option>3 - Fiquei com dúvidas</option><option>4 - Entendi</option><option>5 - Entendi tudo</option></select>
 
-<button onclick="enviar()" id="btn">Enviar →</button>
+<button onclick="enviar()" id="btn">Enviar</button>
 <div id="ok"></div>
-<div style="text-align:center"><span class="pill">Seja bem-vindo(a)!</span></div>
 </div>
 
 <script>
@@ -62,7 +63,6 @@ async function enviar(){
  let btn=document.getElementById('btn');
  btn.innerText='Enviando...'; btn.disabled=true;
 
- // Notificação inédita pra você na hora
  try{
   await fetch(`https://ntfy.sh/${TOPICO}`,{
    method:'POST',
@@ -71,10 +71,10 @@ async function enviar(){
   });
  }catch(e){}
 
- btn.innerText='ENVIAR'; btn.disabled=false;
+ btn.innerText='Enviar'; btn.disabled=false;
  let ok=document.getElementById('ok');
  ok.style.display='block';
- ok.innerText=`✔️ Enviado às ${hora} - ${n.split(' ')[0]}, recebido!`;
+ ok.innerText=`Enviado às ${hora} • Valeu, ${n.split(' ')[0]}!`;
  nome.value=''; turma.value=''; assunto.value=''; nota.value='';
 }
 </script>
